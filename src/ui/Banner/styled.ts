@@ -9,13 +9,23 @@ const BannerContainer = styled.div`
   background-color: white;
   margin: 0 auto;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 32px;
+  container-type: inline-size;
+  container-name: banner;
 
-  @media (max-width: 1024px) {
+  @container banner (max-width: 500px) {
     height: 475px;
-    padding: 86px 20px 20px20px;
+    padding: 20px;
+  }
+
+  /* Fallback для старых браузеров */
+  @supports not (container-type: inline-size) {
+    @media (max-width: 1024px) {
+      height: 475px;
+      padding: 20px;
+    }
   }
 `;
 
@@ -23,18 +33,31 @@ const BannerImageContainer = styled.div`
   width: 475px;
   height: 100%;
   position: absolute;
-  right: 0;
+  left: 475px;
   top: 0;
   border-radius: 0 32px 32px 0;
   overflow: hidden;
   background-color: #f5f5f5;
 
-  @media (max-width: 1024px) {
+  @container banner (max-width: 700px) {
     width: 100%;
     height: 211px;
+    left: 0;
     top: auto;
     bottom: 0;
     border-radius: 0 0 32px 32px;
+  }
+
+  /* Fallback для старых браузеров */
+  @supports not (container-type: inline-size) {
+    @media (max-width: 1024px) {
+      width: 100%;
+      height: 211px;
+      left: 0;
+      top: auto;
+      bottom: 0;
+      border-radius: 0 0 32px 32px;
+    }
   }
 `;
 
@@ -46,21 +69,40 @@ const BannerImage = styled.img`
   right: 0;
   top: 0;
 
-  @media (max-width: 1024px) {
+  @container banner (max-width: 700px) {
     left: 50%;
     right: auto;
     top: 50%;
     transform: translate(-50%, -50%);
   }
+
+  /* Fallback для старых браузеров */
+  @supports not (container-type: inline-size) {
+    @media (max-width: 1024px) {
+      left: 50%;
+      right: auto;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 `;
 
 const BannerContent = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 400px;
+  position: absolute;
+  left: 40px;
+  top: 32px;
+  max-width: 350px;
 
+  @container banner (max-width: 700px) {
+    top: 20px;
+  }
+
+  /* Fallback для старых браузеров */
+  @supports not (container-type: inline-size) {
+    @media (max-width: 1024px) {
+      top: 20px;
+    }
+  }
 `;
 
 const BannerTitle = styled.h1`
